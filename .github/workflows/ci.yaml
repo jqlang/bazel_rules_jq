@@ -1,0 +1,60 @@
+name: CI
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          # builds on windows fail
+          # https://github.com/bazelbuild/rules_docker/issues/1524
+          # https://github.com/bazelbuild/rules_docker/issues/1438
+          # - windows-latest
+        bazel: [ 4.2.1, 5.0.0rc4 ]
+    # The type of runner that the job will run on
+    runs-on: ${{ matrix.os }}
+
+    name: test-on-${{ matrix.os }}-with-bazel-${{ matrix.bazel }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: bazelbuild/setup-bazelisk@v1
+      - name: Mount bazel action cache
+        uses: actions/cache@v2
+        with:
+          path: "~/.cache/bazel"
+          key: bazel
+      - name: Mount bazel repo cache
+        uses: actions/cache@v2
+        with:
+          path: "~/.cache/bazel-repo"
+          key: bazel-repo
+      - name: Set Bazelisk Version ${{ matrix.bazel }}
+        run: echo ${{ matrix.bazel }} > .bazelversion
+      - name: Build
+        shell: bash
+        env:
+          # Bazelisk will download bazel to here
+          XDG_CACHE_HOME: ~/.cache/bazel-repo
+        run: bazel --bazelrc=.github/workflows/ci.bazelrc --bazelrc=.bazelrc build ...
+      - name: Test
+        shell: bash
+        env:
+          # Bazelisk will download bazel to here
+          XDG_CACHE_HOME: ~/.cache/bazel-repo
+        run: bazel --bazelrc=.github/workflows/ci.bazelrc --bazelrc=.bazelrc test ...
