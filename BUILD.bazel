@@ -14,7 +14,7 @@ gazelle(
 
 # This declares the release artifact users
 pkg_tar(
-    name = "slamdev_rules_jq",
+    name = "bazel_rules_jq",
     srcs = [
         "LICENSE",
         "README.md",
