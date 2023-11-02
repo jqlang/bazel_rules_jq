@@ -1,7 +1,7 @@
 # Declare the local Bazel workspace.
 # This is *not* included in the published distribution.
 workspace(
-    name = "slamdev_rules_jq",
+    name = "rules_jq",
 )
 
 load(":internal_deps.bzl", "rules_jq_internal_deps")
