@@ -4,4 +4,7 @@ build --announce_rc
 test --test_output=errors
 build --disk_cache=$HOME/.cache/bazel
 build --repository_cache=$HOME/.cache/bazel-repo
+
+# XDG_CACHE_HOME is where bazelisk -- if used -- will cache downloads; workflows use setup-bazelisk
+# which aliases 'bazel' to bazelisk.  We inject this into the test runner env like an action_env
 test --test_env=XDG_CACHE_HOME

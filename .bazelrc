@@ -1,6 +1,5 @@
-# Bazel settings that apply to this repository.
-# Take care to document any settings that you expect users to apply.
-# Settings that apply only to CI are in .github/workflows/ci.bazelrc
+# These Bazel settings are applied by default; settings that apply only to CI are in
+# .github/workflows/ci.bazelrc and are applied in .github/workflows/ci.yaml
 build --nolegacy_external_runfiles
 
 # Load any settings specific to the current user.
