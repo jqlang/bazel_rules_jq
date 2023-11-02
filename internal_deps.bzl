@@ -12,11 +12,29 @@ def rules_jq_internal_deps():
     maybe(
         http_archive,
         name = "rules_pkg",
-        urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.2.4/rules_pkg-0.2.4.tar.gz",
-            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.4/rules_pkg-0.2.4.tar.gz",
+        patch_args = ["-p1"],
+        patches = [
+            # https://github.com/bazelbuild/rules_pkg/pull/169
+            "//:lib/bazel/fix-python-version-PY2-per-rules_pkg-PR169.patch",
         ],
-        sha256 = "4ba8f4ab0ff85f2484287ab06c0d871dcb31cc54d439457d28fd4ae14b18450a",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.2.5/rules_pkg-0.2.5.tar.gz",
+            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.5/rules_pkg-0.2.5.tar.gz",
+        ],
+        sha256 = "352c090cc3d3f9a6b4e676cf42a6047c16824959b438895a76c2989c6d7c246a",
+    )
+
+    # NOTE: in making minimal changes, the typical load of py_repositories() from
+    # python:repositories.bzl was not necessary in WORKSPACE
+    #
+    # load("@rules_python//python:repositories.bzl", "py_repositories")
+    # py_repositories()
+    maybe(
+        http_archive,
+        name = "rules_python",
+        url = "https://github.com/bazelbuild/rules_python/releases/download/0.0.2/rules_python-0.0.2.tar.gz",
+        strip_prefix = "rules_python-0.0.2",
+        sha256 = "b5668cde8bb6e3515057ef465a35ad712214962f0b3a314e551204266c7be90c",
     )
 
     maybe(

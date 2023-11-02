@@ -1,0 +1,14 @@
+diff -ur rules_pkg/BUILD rules_pkg/BUILD
+--- rules_pkg/BUILD	2023-11-02 11:32:55
++++ rules_pkg/BUILD	2023-11-02 11:33:28
+@@ -35,8 +35,8 @@
+ py_binary(
+     name = "build_tar",
+     srcs = ["build_tar.py"],
+-    python_version = "PY2",
+-    srcs_version = "PY2AND3",
++    python_version = "PY3",
++    srcs_version = "PY3",
+     visibility = ["//visibility:public"],
+     deps = [
+         ":archive",
