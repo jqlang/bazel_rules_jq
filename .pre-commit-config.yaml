@@ -20,10 +20,7 @@ repos:
     rev: v1.32.0
     hooks:
       - id: yamllint
-        args: [
-          '-d',
-          '{extends: relaxed, rules: {line-length: {max: 120}}}'
-        ]
+        args: ["-d", "{extends: relaxed, rules: {line-length: {max: 120}}}"]
   # Enforce that commit messages allow for later changelog generation
   - repo: https://github.com/commitizen-tools/commitizen
     rev: 3.12.0
@@ -63,5 +60,5 @@ repos:
         # a local allowlist of dictionary words in .github/cspell.yaml.  This can get comical --
         # adding new words in every PR -- but the cost/benefit balance may avoid some embarassing
         # typos
-        args: [ '--config', '.github/cspell.yaml' ]
+        args: ["--config", ".github/cspell.yaml"]
         types: [file, markdown]

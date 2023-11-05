@@ -18,9 +18,12 @@ language: en
 # words - list of words to be always considered correct: an Allowlist per-se
 words:
   - allanc
+  - argsjson
   - bazel
   - bazelisk
   - bazelrc
+  - bitrot
+  - buildifier
   - bzlmod
   - chickenandpork
   - ibazel
@@ -28,3 +31,9 @@ words:
   - ruleset
   - slamdev
   - starlark
+  - genrule
+  - kwargs
+  - runfiles
+  - softlinks
+  - srcs
+  - stardoc

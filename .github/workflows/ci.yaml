@@ -23,7 +23,7 @@ jobs:
           # https://github.com/bazelbuild/rules_docker/issues/1524
           # https://github.com/bazelbuild/rules_docker/issues/1438
           # - windows-latest
-        bazel: [ 4.2.1, 5.0.0rc4 ]
+        bazel: [4.2.4, 5.4.1, 6.2.0]
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
 
@@ -58,3 +58,17 @@ jobs:
           # Bazelisk will download bazel to here
           XDG_CACHE_HOME: ~/.cache/bazel-repo
         run: bazel --bazelrc=.github/workflows/ci.bazelrc --bazelrc=.bazelrc test ...
+      - name: Build examples to ensure functionality
+        # linux and latest
+        if: ${{ matrix.os == 'ubuntu-latest' && startsWith(matrix.bazel, '6.') }}
+        run: |
+          for d in $(find full-examples -name WORKSPACE -exec dirname {} \; ); do
+          echo "::group::example: ${d}"
+          echo ${{ matrix.bazel }} > ${d}/.bazelversion
+          case ${RUNNER_ENVIRONMENT}:${d} in
+              # opportunity to skip really big tests
+              # github-hosted:full-examples/huggingface_transformer_question_answering) echo "TOO big: skip in github-hosted" ;;
+              *) (cd ${d} && bazel --bazelrc=../../.github/workflows/ci.bazelrc --bazelrc=../../.bazelrc test ... && bazel clean );;
+          esac
+          echo "::endgroup::"
+          done

@@ -40,7 +40,7 @@ jobs:
           body: |
             ```starlark
             http_archive(
-                name = "bazel_rules_jq",
+                name = "rules_jq",
                 sha256 = "${{ env.RELEASE_CHECKSUM }}",
                 url = "https://github.com/jqlang/bazel_rules_jq/releases/download/${{ env.RELEASE_VERSION }}/bazel_rules_jq-v${{ env.RELEASE_VERSION }}.tar.gz",
             )
