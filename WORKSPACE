@@ -15,8 +15,8 @@ load("//jq:repositories.bzl", "jq_register_toolchains", "rules_jq_dependencies")
 rules_jq_dependencies()
 
 jq_register_toolchains(
-    name = "jq1_6",
-    jq_version = "1.6",
+    name = "jq",
+    jq_version = "1.7",
 )
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
