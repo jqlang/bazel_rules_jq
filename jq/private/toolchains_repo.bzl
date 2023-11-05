@@ -20,10 +20,18 @@ with only the toolchain attribute pointing into the platform-specific repositori
 # Add more platforms as needed to mirror all the binaries
 # published by the upstream project.
 PLATFORMS = {
+    # This artifact exists in pre-1.7 and post-1.6; JQ may drop the osx- moniker but until then, we
+    # don't need to do any tricky logic
     "osx-amd64": struct(
         compatible_with = [
             "@platforms//os:macos",
             "@platforms//cpu:x86_64",
+        ],
+    ),
+    "macos-arm64": struct(
+        compatible_with = [
+            "@platforms//os:macos",
+            "@platforms//cpu:aarch64",
         ],
     ),
     "linux64": struct(

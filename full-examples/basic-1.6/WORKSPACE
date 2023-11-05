@@ -1,4 +1,4 @@
-workspace(name = "basic")
+workspace(name = "basic-1.6")
 
 # When using in your project, this can be a direct cut-n-paste, however you should replace the
 # local_repository with a http_archive() block similar to the following, using the version and
@@ -23,5 +23,5 @@ rules_jq_dependencies()
 
 jq_register_toolchains(
     name = "jq",
-    jq_version = "1.7",
+    jq_version = "1.6",
 )
