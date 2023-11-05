@@ -1,6 +1,5 @@
 "jq_eval rule"
 
-load("@bazel_skylib//lib:collections.bzl", "collections")
 load("@bazel_skylib//lib:shell.bzl", "shell")
 
 _DOC = "Defines a jq eval execution."
