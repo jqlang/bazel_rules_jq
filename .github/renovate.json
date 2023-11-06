@@ -1,5 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+
+  "packageRules": [
+    {
+      "enabled": true,
+      "matchManagers": ["regex"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["renovate-regex.json$"],
+      "matchStrings": [
+        "\"renovate_datasource\": \"(?<datasource>.*?)\",\\s    \"renovate_depname\": \"(?<depName>.*?)\",\\s(    \"renovate_versioning\": \"(?<versioning>.*?)\",\\s)?(    \"sha256\": \"(?<currentDigest>.*?)\",\\s)?    \"version\": \"(?<currentValue>.*?)\""
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
+    }
+  ],
+  "reviewers": ["@chickenandpork"]
 }

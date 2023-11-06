@@ -1,3 +1,5 @@
 docs/repositories.md
 docs/rules.md
 docs/toolchain.md
+# whitespsce matters: a regex is used to parse and automatically update this json
+.github/renovate-regex.json

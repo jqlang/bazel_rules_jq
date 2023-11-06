@@ -1,0 +1,8 @@
+{
+  "jq": {
+    "renovate_datasource": "github-tags",
+    "renovate_depname": "jqlang/jq",
+    "renovate_versioning": "regex:^jq-(?<major>\d+)(\.(?<minor>\d+))?(\.(?<patch>\d+))?$",
+    "version": "jq-1.6"
+  }
+}
