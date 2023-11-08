@@ -20,5 +20,5 @@
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
     }
   ],
-  "reviewers": ["@bazel_rules_jq-admins"]
+  "reviewers": ["@bazel_rules_jq-maintainers"]
 }
